@@ -157,5 +157,88 @@ lc2_add = lc2.get_child_by_name("LC1 «adda()»")
 lc2_add.name = "LC2 «adda()»"
 ```
 
+Let's add more functionality to our study. Again, we are plugging-in
+a function that has argument names that are inconsistent with our
+parameter naming scheme:
 
 
+```{python, collapse=TRUE, results='hold'}
+def multk(k:"a", l:"b", m:"c" = 1) -> "mult_res":
+    return k * l * m
+```
+
+```{python, collapse=TRUE, results='hold'}
+base.plugin_func(multk)
+result = base.multk()
+print(f"{base.a} * {base.b} * {base.c} = {result}")
+```
+
+Here, we are taking advantage of Python's function
+annotations to avoid having to explicitly specify an
+argument map for plug-in function :code:`multk`. 
+If we did not have access to the original function code,
+or if we wanted to use function annotations for 
+other purposes, we would define argument
+:code:`argmap={"k":"a", "l":"b", "m":"c", "return":"mult_res"}`
+when invoking method :code:`plugin_func` in this case.
+
+
+Let's add another :code:`Calc` node using :code:`multk`:
+
+```{python, collapse=TRUE, results='hold'}
+lc3_mul = Calc("LC3 «multk()»", base, funcname="multk")
+import numpy as np
+lc3_mul.b = np.linspace(0,10,3)
+lc3_mul()
+lc3_mul.to_dataframe()
+```
+
+Let's take a look at the tree structure of the study
+we have built:
+
+```{python, collapse=TRUE, results='hold'}
+print(base.to_texttree())
+```
+
+A :code:`vntree.Node` instance is a generator, the whole
+tree, or a sub-tree, can be traversed simply by interating
+over the root node. In this example, the study tree is
+traversed top-down, and all the :code:`Calc` found are
+executed:
+
+```{python, collapse=TRUE, results='hold'}
+for node in base:
+    if type(node) == Calc:
+        node()
+```
+
+
+Now that our study has been re-calculated, we will save it:
+
+```{python, collapse=TRUE, results='hold'}
+base.savefile("simple_study.pflacs")
+```
+
+This saves the study tree in the Python :code:`pickle` format.
+To re-open the study, we would use the class method
+:code:` Premise.openfile`:
+
+```{python, collapse=TRUE, results='hold'}
+new_study = Premise.openfile("simple_study.pflacs")
+```
+
+Using the :code:`pickle` format to persist `pflacs` trees is 
+convenient because it can easily serialize most common `Python`
+object types. However, we could be using `pflacs` to carry
+out large projects with many input parameters and calculation
+loadcases, in which case there would a lot of output data to save.
+In that case, `HDF5` is a more suitable format for saving the
+results dataframes in tables:
+
+```{python, collapse=TRUE, results='hold'}
+for node in base:
+    if type(node) == Calc:
+        node.to_hdf5()
+```
+
+As you can see in Figures :ref:`fig1`

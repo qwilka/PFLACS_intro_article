@@ -291,6 +291,81 @@ inherited from <code>vntree.Node</code>:</p>
 <a class="sourceLine" id="cb11-5" data-line-number="5">lc2_sub.name <span class="op">=</span> <span class="st">&quot;LC2 «subx()»&quot;</span></a>
 <a class="sourceLine" id="cb11-6" data-line-number="6">lc2_add <span class="op">=</span> lc2.get_child_by_name(<span class="st">&quot;LC1 «adda()»&quot;</span>)</a>
 <a class="sourceLine" id="cb11-7" data-line-number="7">lc2_add.name <span class="op">=</span> <span class="st">&quot;LC2 «adda()»&quot;</span></a></code></pre></div>
+<p>Let’s add more functionality to our study. Again, we are plugging-in
+a function that has argument names that are inconsistent with our
+parameter naming scheme:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">def</span> multk(k:<span class="st">&quot;a&quot;</span>, l:<span class="st">&quot;b&quot;</span>, m:<span class="st">&quot;c&quot;</span> <span class="op">=</span> <span class="dv">1</span>) <span class="op">-&gt;</span> <span class="st">&quot;mult_res&quot;</span>:</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">    <span class="cf">return</span> k <span class="op">*</span> l <span class="op">*</span> m</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" data-line-number="1">base.plugin_func(multk)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">## True</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">result <span class="op">=</span> base.multk()</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>base<span class="sc">.a}</span><span class="ss"> * </span><span class="sc">{</span>base<span class="sc">.b}</span><span class="ss"> * </span><span class="sc">{</span>base<span class="sc">.c}</span><span class="ss"> = </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">&quot;</span>)</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">## 10 * 5 * 6.5 = 325.0</span></a></code></pre></div>
+<p>Here, we are taking advantage of Python’s function
+annotations to avoid having to explicitly specify an
+argument map for plug-in function :code:<code>multk</code>.
+If we did not have access to the original function code,
+or if we wanted to use function annotations for
+other purposes, we would define argument
+:code:<code>argmap={&quot;k&quot;:&quot;a&quot;, &quot;l&quot;:&quot;b&quot;, &quot;m&quot;:&quot;c&quot;, &quot;return&quot;:&quot;mult_res&quot;}</code>
+when invoking method :code:<code>plugin_func</code> in this case.</p>
+<p>Let’s add another :code:<code>Calc</code> node using :code:<code>multk</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb14-1" data-line-number="1">lc3_mul <span class="op">=</span> Calc(<span class="st">&quot;LC3 «multk()»&quot;</span>, base, funcname<span class="op">=</span><span class="st">&quot;multk&quot;</span>)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="im">import</span> numpy <span class="im">as</span> np</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">lc3_mul.b <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">lc3_mul()</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">## array([  0., 325., 650.])</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">lc3_mul.to_dataframe()</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co">##     a     b    c  mult_res</span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">## 0  10   0.0  6.5       0.0</span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co">## 1  10   5.0  6.5     325.0</span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">## 2  10  10.0  6.5     650.0</span></a></code></pre></div>
+<p>Let’s take a look at the tree structure of the study
+we have built:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="bu">print</span>(base.to_texttree())</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">## | Base case</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">## +--| Load case 1</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">## .  +--| LC1 «subx()»</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">## .  .  | LC1 «adda()»</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">## .  | Load case 2</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">## .  +--| LC2 «subx()»</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">## .  .  | LC2 «adda()»</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">## .  | LC3 «multk()»</span></a></code></pre></div>
+<p>A :code:<code>vntree.Node</code> instance is a generator, the whole
+tree, or a sub-tree, can be traversed simply by interating
+over the root node. In this example, the study tree is
+traversed top-down, and all the :code:<code>Calc</code> found are
+executed:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="cf">for</span> node <span class="kw">in</span> base:</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">    <span class="cf">if</span> <span class="bu">type</span>(node) <span class="op">==</span> Calc:</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">        node()</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">## «subx» w/args x=100 y=5 z=6.5</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">## 88.5</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">## «adda» w/args a=100 b=5 c=6.5</span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">## 111.5</span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">## «subx» w/args x=200 y=5 z=6.5</span></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="co">## 188.5</span></a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="co">## «adda» w/args a=200 b=5 c=6.5</span></a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">## 211.5</span></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="co">## array([  0., 325., 650.])</span></a></code></pre></div>
+<p>Now that our study has been re-calculated, we will save it:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb17-1" data-line-number="1">base.savefile(<span class="st">&quot;simple_study.pflacs&quot;</span>)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">## True</span></a></code></pre></div>
+<p>This saves the study tree in the Python :code:<code>pickle</code> format.
+To re-open the study, we would use the class method
+:code:<code>Premise.openfile</code>:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb18-1" data-line-number="1">new_study <span class="op">=</span> Premise.openfile(<span class="st">&quot;simple_study.pflacs&quot;</span>)</a></code></pre></div>
+<p>Using the :code:<code>pickle</code> format to persist <code>pflacs</code> trees is
+convenient because it can easily serialize most common <code>Python</code>
+object types. However, we could be using <code>pflacs</code> to carry
+out large projects with many input parameters and calculation
+loadcases, in which case there would a lot of output data to save.
+In that case, <code>HDF5</code> is a more suitable format for saving the
+results dataframes in tables:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="cf">for</span> node <span class="kw">in</span> base:</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">    <span class="cf">if</span> <span class="bu">type</span>(node) <span class="op">==</span> Calc:</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">        node.to_hdf5()</a></code></pre></div>
+<p>As you can see in Figures :ref:<code>fig1</code></p>
 
 </div>
             </section>
