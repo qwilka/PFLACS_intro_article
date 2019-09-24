@@ -1,0 +1,161 @@
+# Basic usage
+
+We will now further explore the use and capabilities 
+of ``pflacs`` through two examples, first 
+a very simple study that showcases basic usage, and
+after that a real-life example is presented demonstrating
+the engineering design of a subsea pipeline using ``pflacs``.
+
+Taking a very simple example to illustrate basic usage, we start by importing the ``pflacs.Premise`` class.
+``Premise`` is the fundemental class in ``pflacs``, it is a sub-class of ``vntree.Node`` :cite:`vntree`, 
+and hence ``Premise`` instances are nodes in a tree data structure. The purpose of ``Premise`` is to contain
+the study parameters (these are the *premise* of the study), and to group together other tree nodes.
+
+```{python, engine.path='/home/develop/local/anaconda3/envs/py3/bin/python'}
+from pflacs import Premise
+base = Premise("Base case", parameters={"a":10, "b":5} )
+print(f"base.a={base.a} base.b={base.b}")
+```
+
+The `parameters` dictionary items are passed to a 
+method `Premise.add_param`
+that uses a ``pflacs`` descriptor class called `Parameter` to convert the
+parameters into attributes of the `Premise` node instance.
+
+```{python}
+def adda(a, b, c=0):
+    print(f"«adda» w/args a={a} b={b}", end="")
+    print(f" c={c}") if c else print()
+    return a + b + c
+```
+
+and using the method `Premise.plugin_func` to plug-in (or "patch") the function ``adda`` 
+into our study tree nodes, and invoking ``adda`` on instance `base`:
+
+```{python, collapse=TRUE, results='hide'}
+base.plugin_func(adda);
+result = base.adda()
+print(f"base.adda() result={result}")
+```
+
+
+Method :code:`plugin_func` invokes a `pflacs` class called `Function` that
+wraps the plug-in function and binds it to the `Premise` node instance.
+The `Function` class uses Python's :code:`inspect.Signature` class 
+to determine the plug-in function's call signature, which includes
+names of the arguments that `adda` requires. When `adda` is invoked 
+on a `Premise` node,
+any argument that is not explicitly specified is 
+supplied from the node attribute with the same name. 
+If an attribute with the argument name is not found in the current node 
+instance, `pflacs` ascends the tree until it finds an ancestor node
+that has the required attribute, and applies its value as the
+required argument.
+
+So, argument values are applied in accordance with the following
+precedence order:
+
+#. argument explicitly specified in function call,
+#. node instance attribute,
+#. ancestor node attribute,
+#. original function default value.
+
+The follow examples use explicit arguments, node instance attribute
+values, and function default values:
+
+```{python, collapse=TRUE, results='hold'}
+result = base.adda(b=-3)
+print(f"base.adda(b=-3) result={result}")
+result = base.adda(5, 4.2, -3)
+print(f"base.adda(5,4.2,-3) res={result}")
+```
+
+To make things a bit more interesting, we will add more functionality:
+
+```{python}
+def subx(x, y, z=0):
+    print(f"«subx» w/args x={x} y={y}", end="")
+    print(f" z={z}") if z else print()
+    return x - y - z
+```
+
+Inconveniently, the arguments of function ``subx`` do not correspond with 
+our adopted parameter
+naming scheme, so we need to supply a mapping to indicate how the node parameters/
+attributes
+should be applied to ``subx``. We will also introduce a new 
+parameter as instance attribute ``base.c``:
+
+```{python, collapse=TRUE, results='hold'}
+base.plugin_func(subx, argmap={"x":"a", "y":"b", "z":"c"} )
+base.add_param("c", 6.5)
+print("base.subx() =", base.subx() )
+print("base.subx(b=99) =", base.subx(b=99) )
+```
+
+We would now like to introduce a new load case, or parameter study, 
+so we instantiate a new `Premise` node with root node `base`
+as its parent:
+
+```{python, collapse=TRUE, results='hold'}
+lc1 = Premise("Load case 1", parent=base, parameters={"a":100})
+result = lc1.adda()
+print(f"lc1.adda() result={result}")
+```
+
+Node «Load case 1» has its own attribute `a`
+and it applies the value :code:`lc1.a` as the first argument
+to `adda`. Node «Load case 1» inherits
+values for attributes :code:`lc1.b` and :code:`lc1.c`
+from its
+parent node `base`, and applies those values
+as `adda` arguments `b` and `c`  in the function call.
+
+`Premise` nodes do not automatically store the results of
+function calls, but we now introduce a new node
+class that does.  `pflacs.Calc` is a sub-class of `Premise`
+that has a defined :code:`__call__` method that invokes a specific 
+plug-in function. 
+
+
+```{python, collapse=TRUE, results='hold'}
+from pflacs import Calc
+lc1_sub = Calc("LC1 «subx()»", lc1, funcname="subx")
+lc1_sub(); print(lc1_sub._subx)
+```
+
+The return value that results from executing the :code:`Calc`
+node is assigned to a node attribute called :code:`_subx`.
+By default, this result attribute takes its name from the
+function, prefixed with an underscore to avoid a name-clash.
+The name of the return result attribute can be specified
+by adding an item with key 'return' to the argument mapping:
+
+```{python, collapse=TRUE, results='hold'}
+lc1_add = Calc("LC1 «adda()»", lc1, funcname="adda", argmap={"return":"adda_res"})
+lc1_add(); print(lc1_add.adda_res)
+df = lc1_add.to_dataframe(); print(df)
+```
+
+The :code:`Calc.to_dataframe` method creates a :code:`Pandas` 
+dataframe from
+the argument values and the function return value.
+
+We would now like to create another parameter study, similar to 
+"Load case 1". The easiest way to do this is to copy the branch
+we have already prepared, and make the necessary changes to the
+new branch. In this code block, we are using tree methods
+inherited from `vntree.Node`:
+
+```{python, collapse=TRUE, results='hold'}
+lc2 = base.add_child( lc1.copy() )
+lc2.name = "Load case 2"
+lc2.a = 200
+lc2_sub = lc2.get_child_by_name("LC1 «subx()»")
+lc2_sub.name = "LC2 «subx()»"
+lc2_add = lc2.get_child_by_name("LC1 «adda()»")
+lc2_add.name = "LC2 «adda()»"
+```
+
+
+

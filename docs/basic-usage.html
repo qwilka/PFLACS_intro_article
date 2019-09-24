@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 3 Basic usage | Introduction to Pflacs: Faster load cases and parameter studies with Python</title>
+  <meta name="description" content="This is a test article describing PFLACS" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 3 Basic usage | Introduction to Pflacs: Faster load cases and parameter studies with Python" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a test article describing PFLACS" />
+  <meta name="github-repo" content="qwilka/blog-resources" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 3 Basic usage | Introduction to Pflacs: Faster load cases and parameter studies with Python" />
+  
+  <meta name="twitter:description" content="This is a test article describing PFLACS" />
+  
+
+<meta name="author" content="Stephen McEntee" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-pflacs.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">Introduction to <span style="font-variant:small-caps;">Pflacs</span></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#abstract"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Engineering Design</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#a-historical-note"><i class="fa fa-check"></i><b>1.1</b> A historical note</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-pflacs.html"><a href="introduction-to-pflacs.html"><i class="fa fa-check"></i><b>2</b> Introduction to <span class="smallcaps">Pflacs</span></a></li>
+<li class="chapter" data-level="3" data-path="basic-usage.html"><a href="basic-usage.html"><i class="fa fa-check"></i><b>3</b> Basic usage</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to <span class="smallcaps">Pflacs</span>: Faster load cases and parameter studies with Python</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basic-usage" class="section level1">
+<h1><span class="header-section-number">Section 3</span> Basic usage</h1>
+<p>We will now further explore the use and capabilities
+of <code>pflacs</code> through two examples, first
+a very simple study that showcases basic usage, and
+after that a real-life example is presented demonstrating
+the engineering design of a subsea pipeline using <code>pflacs</code>.</p>
+<p>Taking a very simple example to illustrate basic usage, we start by importing the <code>pflacs.Premise</code> class.
+<code>Premise</code> is the fundemental class in <code>pflacs</code>, it is a sub-class of <code>vntree.Node</code> :cite:<code>vntree</code>,
+and hence <code>Premise</code> instances are nodes in a tree data structure. The purpose of <code>Premise</code> is to contain
+the study parameters (these are the <em>premise</em> of the study), and to group together other tree nodes.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="im">from</span> pflacs <span class="im">import</span> Premise</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">base <span class="op">=</span> Premise(<span class="st">&quot;Base case&quot;</span>, parameters<span class="op">=</span>{<span class="st">&quot;a&quot;</span>:<span class="dv">10</span>, <span class="st">&quot;b&quot;</span>:<span class="dv">5</span>} )</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="bu">print</span>(<span class="ss">f&quot;base.a=</span><span class="sc">{</span>base<span class="sc">.a}</span><span class="ss"> base.b=</span><span class="sc">{</span>base<span class="sc">.b}</span><span class="ss">&quot;</span>)</a></code></pre></div>
+<pre><code>## base.a=10 base.b=5</code></pre>
+<p>The <code>parameters</code> dictionary items are passed to a
+method <code>Premise.add_param</code>
+that uses a <code>pflacs</code> descriptor class called <code>Parameter</code> to convert the
+parameters into attributes of the <code>Premise</code> node instance.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">def</span> adda(a, b, c<span class="op">=</span><span class="dv">0</span>):</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">    <span class="bu">print</span>(<span class="ss">f&quot;«adda» w/args a=</span><span class="sc">{a}</span><span class="ss"> b=</span><span class="sc">{b}</span><span class="ss">&quot;</span>, end<span class="op">=</span><span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">    <span class="bu">print</span>(<span class="ss">f&quot; c=</span><span class="sc">{c}</span><span class="ss">&quot;</span>) <span class="cf">if</span> c <span class="cf">else</span> <span class="bu">print</span>()</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">    <span class="cf">return</span> a <span class="op">+</span> b <span class="op">+</span> c</a></code></pre></div>
+<p>and using the method <code>Premise.plugin_func</code> to plug-in (or “patch”) the function <code>adda</code>
+into our study tree nodes, and invoking <code>adda</code> on instance <code>base</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1">base.plugin_func(adda)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">result <span class="op">=</span> base.adda()</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="bu">print</span>(<span class="ss">f&quot;base.adda() result=</span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">&quot;</span>)</a></code></pre></div>
+<p>Method :code:<code>plugin_func</code> invokes a <code>pflacs</code> class called <code>Function</code> that
+wraps the plug-in function and binds it to the <code>Premise</code> node instance.
+The <code>Function</code> class uses Python’s :code:<code>inspect.Signature</code> class
+to determine the plug-in function’s call signature, which includes
+names of the arguments that <code>adda</code> requires. When <code>adda</code> is invoked
+on a <code>Premise</code> node,
+any argument that is not explicitly specified is
+supplied from the node attribute with the same name.
+If an attribute with the argument name is not found in the current node
+instance, <code>pflacs</code> ascends the tree until it finds an ancestor node
+that has the required attribute, and applies its value as the
+required argument.</p>
+<p>So, argument values are applied in accordance with the following
+precedence order:</p>
+<ol>
+<li>argument explicitly specified in function call,</li>
+<li>node instance attribute,</li>
+<li>ancestor node attribute,</li>
+<li>original function default value.</li>
+</ol>
+<p>The follow examples use explicit arguments, node instance attribute
+values, and function default values:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1">result <span class="op">=</span> base.adda(b<span class="op">=-</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">## «adda» w/args a=10 b=-3</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="bu">print</span>(<span class="ss">f&quot;base.adda(b=-3) result=</span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">&quot;</span>)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">## base.adda(b=-3) result=7</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">result <span class="op">=</span> base.adda(<span class="dv">5</span>, <span class="fl">4.2</span>, <span class="dv">-3</span>)</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">## «adda» w/args a=5 b=4.2 c=-3</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="bu">print</span>(<span class="ss">f&quot;base.adda(5,4.2,-3) res=</span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">&quot;</span>)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">## base.adda(5,4.2,-3) res=6.199999999999999</span></a></code></pre></div>
+<p>To make things a bit more interesting, we will add more functionality:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">def</span> subx(x, y, z<span class="op">=</span><span class="dv">0</span>):</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">    <span class="bu">print</span>(<span class="ss">f&quot;«subx» w/args x=</span><span class="sc">{x}</span><span class="ss"> y=</span><span class="sc">{y}</span><span class="ss">&quot;</span>, end<span class="op">=</span><span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="bu">print</span>(<span class="ss">f&quot; z=</span><span class="sc">{z}</span><span class="ss">&quot;</span>) <span class="cf">if</span> z <span class="cf">else</span> <span class="bu">print</span>()</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">    <span class="cf">return</span> x <span class="op">-</span> y <span class="op">-</span> z</a></code></pre></div>
+<p>Inconveniently, the arguments of function <code>subx</code> do not correspond with
+our adopted parameter
+naming scheme, so we need to supply a mapping to indicate how the node parameters/
+attributes
+should be applied to <code>subx</code>. We will also introduce a new
+parameter as instance attribute <code>base.c</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1">base.plugin_func(subx, argmap<span class="op">=</span>{<span class="st">&quot;x&quot;</span>:<span class="st">&quot;a&quot;</span>, <span class="st">&quot;y&quot;</span>:<span class="st">&quot;b&quot;</span>, <span class="st">&quot;z&quot;</span>:<span class="st">&quot;c&quot;</span>} )</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">## True</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">base.add_param(<span class="st">&quot;c&quot;</span>, <span class="fl">6.5</span>)</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">## True</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="bu">print</span>(<span class="st">&quot;base.subx() =&quot;</span>, base.subx() )</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">## «subx» w/args x=10 y=5 z=6.5</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">## base.subx() = -1.5</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="bu">print</span>(<span class="st">&quot;base.subx(b=99) =&quot;</span>, base.subx(b<span class="op">=</span><span class="dv">99</span>) )</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">## «subx» w/args x=10 y=99 z=6.5</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">## base.subx(b=99) = -95.5</span></a></code></pre></div>
+<p>We would now like to introduce a new load case, or parameter study,
+so we instantiate a new <code>Premise</code> node with root node <code>base</code>
+as its parent:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1">lc1 <span class="op">=</span> Premise(<span class="st">&quot;Load case 1&quot;</span>, parent<span class="op">=</span>base, parameters<span class="op">=</span>{<span class="st">&quot;a&quot;</span>:<span class="dv">100</span>})</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">result <span class="op">=</span> lc1.adda()</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">## «adda» w/args a=100 b=5 c=6.5</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="bu">print</span>(<span class="ss">f&quot;lc1.adda() result=</span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">&quot;</span>)</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">## lc1.adda() result=111.5</span></a></code></pre></div>
+<p>Node «Load case 1» has its own attribute <code>a</code>
+and it applies the value :code:<code>lc1.a</code> as the first argument
+to <code>adda</code>. Node «Load case 1» inherits
+values for attributes :code:<code>lc1.b</code> and :code:<code>lc1.c</code>
+from its
+parent node <code>base</code>, and applies those values
+as <code>adda</code> arguments <code>b</code> and <code>c</code> in the function call.</p>
+<p><code>Premise</code> nodes do not automatically store the results of
+function calls, but we now introduce a new node
+class that does. <code>pflacs.Calc</code> is a sub-class of <code>Premise</code>
+that has a defined :code:<code>__call__</code> method that invokes a specific
+plug-in function.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="im">from</span> pflacs <span class="im">import</span> Calc</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">lc1_sub <span class="op">=</span> Calc(<span class="st">&quot;LC1 «subx()»&quot;</span>, lc1, funcname<span class="op">=</span><span class="st">&quot;subx&quot;</span>)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">lc1_sub()<span class="op">;</span> <span class="bu">print</span>(lc1_sub._subx)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">## «subx» w/args x=100 y=5 z=6.5</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">## 88.5</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">## 88.5</span></a></code></pre></div>
+<p>The return value that results from executing the :code:<code>Calc</code>
+node is assigned to a node attribute called :code:<code>_subx</code>.
+By default, this result attribute takes its name from the
+function, prefixed with an underscore to avoid a name-clash.
+The name of the return result attribute can be specified
+by adding an item with key ‘return’ to the argument mapping:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1">lc1_add <span class="op">=</span> Calc(<span class="st">&quot;LC1 «adda()»&quot;</span>, lc1, funcname<span class="op">=</span><span class="st">&quot;adda&quot;</span>, argmap<span class="op">=</span>{<span class="st">&quot;return&quot;</span>:<span class="st">&quot;adda_res&quot;</span>})</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">lc1_add()<span class="op">;</span> <span class="bu">print</span>(lc1_add.adda_res)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">## «adda» w/args a=100 b=5 c=6.5</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">## 111.5</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">## 111.5</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">df <span class="op">=</span> lc1_add.to_dataframe()<span class="op">;</span> <span class="bu">print</span>(df)</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">##      a  b    c  adda_res</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">## 0  100  5  6.5     111.5</span></a></code></pre></div>
+<p>The :code:<code>Calc.to_dataframe</code> method creates a :code:<code>Pandas</code>
+dataframe from
+the argument values and the function return value.</p>
+<p>We would now like to create another parameter study, similar to
+“Load case 1”. The easiest way to do this is to copy the branch
+we have already prepared, and make the necessary changes to the
+new branch. In this code block, we are using tree methods
+inherited from <code>vntree.Node</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" data-line-number="1">lc2 <span class="op">=</span> base.add_child( lc1.copy() )</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">lc2.name <span class="op">=</span> <span class="st">&quot;Load case 2&quot;</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">lc2.a <span class="op">=</span> <span class="dv">200</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">lc2_sub <span class="op">=</span> lc2.get_child_by_name(<span class="st">&quot;LC1 «subx()»&quot;</span>)</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">lc2_sub.name <span class="op">=</span> <span class="st">&quot;LC2 «subx()»&quot;</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">lc2_add <span class="op">=</span> lc2.get_child_by_name(<span class="st">&quot;LC1 «adda()»&quot;</span>)</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">lc2_add.name <span class="op">=</span> <span class="st">&quot;LC2 «adda()»&quot;</span></a></code></pre></div>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-pflacs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"download": ["2019_SMcEntee_Introduction_PFLACS.pdf"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

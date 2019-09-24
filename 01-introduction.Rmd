@@ -1,11 +1,11 @@
-# Introduction {#intro}
+# Introduction to Engineering Design {#intro}
 
 Reproducibility, data management and workflow management are currently 
 areas of considerable interest and activity
 in computational scientific research.
 Recent articles have featured several interesting contributions
 addressing these issues 
-[@vyas_ramasubramani-proc-scipy-2018, @sacred]
+[[@vyas_ramasubramani-proc-scipy-2018], [@sacred]]
 
 In the domains of civil and mechanical engineering analysis and design, similar issues arise due to the significant component of computational work involved. There are however also some important differences when engineering computational work is compared with scientific research. Engineering design is a very iterative process, and scheduling issues can be critical. 
 Often engineering workscopes are executed in parallel in order to maintain project schedules, even when a serial, or waterfall, workflow might be more appropriate.
@@ -34,5 +34,38 @@ complexity when calculations are carried out by hand
 on account of the additional "manhours" required, 
 particularly when re-work is required.   
 
+The arrival of the personal computer on the engineer's desk was considered
+at the time to be a great advancement in terms of productivity improvement, 
+augmentation of computational capability, and general improvement in 
+engineering quality.
+In reality however, the PC was not so much of a revolution
+in the engineering office, it was more of an evolution from paper to the
+desktop computer. Apart from the fact that the actual computational
+work was now being carried out by computer, the actual work practices
+and design processes remain much the same to this day. Granted that there 
+has been a significant increase in use of advanced computational technologies,
+like the finite element method, at the same time a lot of engineering
+design work continues to be based on the same well-understood, simpler
+engineering theory, except that now the caculations are carried out
+on electronic spreadsheets and "worksheets" that greatly resemble their
+paper predecessors. A time-and-motion study carried out on a junior
+engineer in most engineering design offices today would reveal that most of
+their time is spent manually entering data into computer programs, and manually
+copying-and-pasting the calculated results into word processors, and after that
+a great deal of time is spend manaully preparing over-formatted 
+"reports" that require
+constant adjustments to pass quality checks 
+(that are also still carried out manually.)
 
+This at least has been the author's experience in working 
+as a subsea pipeline engineer for more than
+20 years in the oil & gas industry. 
+In recent years however, a great change has come to this industry. 
+Since 2014 an unexpected and sustained reduction in the oil price has
+led to calls to reduce costs, but without compromising
+safety.  It is recognized that oil & gas has fallen behind other industries
+in terms of productivity and technology uptake, and that
+digitalization, adopting new technologies and changing the
+ways we work are widely regarded as means of achieving the goals
+of sustainably reducing costs without increasing risks.
 

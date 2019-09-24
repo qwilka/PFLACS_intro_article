@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 1 Introduction | Introduction to Pflacs: Faster load cases and parameter studies with Python</title>
+  <title>Section 1 Introduction to Engineering Design | Introduction to Pflacs: Faster load cases and parameter studies with Python</title>
   <meta name="description" content="This is a test article describing PFLACS" />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 1 Introduction | Introduction to Pflacs: Faster load cases and parameter studies with Python" />
+  <meta property="og:title" content="Section 1 Introduction to Engineering Design | Introduction to Pflacs: Faster load cases and parameter studies with Python" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="qwilka/blog-resources" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 1 Introduction | Introduction to Pflacs: Faster load cases and parameter studies with Python" />
+  <meta name="twitter:title" content="Section 1 Introduction to Engineering Design | Introduction to Pflacs: Faster load cases and parameter studies with Python" />
   
   <meta name="twitter:description" content="This is a test article describing PFLACS" />
   
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="literature.html"/>
+<link rel="next" href="introduction-to-pflacs.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -131,10 +131,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#abstract"><i class="fa fa-check"></i>Abstract</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Engineering Design</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#a-historical-note"><i class="fa fa-check"></i><b>1.1</b> A historical note</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>2</b> Literature</a></li>
+<li class="chapter" data-level="2" data-path="introduction-to-pflacs.html"><a href="introduction-to-pflacs.html"><i class="fa fa-check"></i><b>2</b> Introduction to <span class="smallcaps">Pflacs</span></a></li>
+<li class="chapter" data-level="3" data-path="basic-usage.html"><a href="basic-usage.html"><i class="fa fa-check"></i><b>3</b> Basic usage</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -157,13 +158,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="intro" class="section level1">
-<h1><span class="header-section-number">Section 1</span> Introduction</h1>
+<h1><span class="header-section-number">Section 1</span> Introduction to Engineering Design</h1>
 <p>Reproducibility, data management and workflow management are currently
 areas of considerable interest and activity
 in computational scientific research.
 Recent articles have featured several interesting contributions
 addressing these issues
-<span class="citation">(Ramasubramani et al. <a href="#ref-vyas_ramasubramani-proc-scipy-2018">2018</a>, <span class="citation">@sacred</span>)</span></p>
+[<span class="citation">(Ramasubramani et al. <a href="#ref-vyas_ramasubramani-proc-scipy-2018">2018</a>)</span>, <span class="citation">(Greff et al. <a href="#ref-sacred">2017</a>)</span>]</p>
 <p>In the domains of civil and mechanical engineering analysis and design, similar issues arise due to the significant component of computational work involved. There are however also some important differences when engineering computational work is compared with scientific research. Engineering design is a very iterative process, and scheduling issues can be critical.
 Often engineering workscopes are executed in parallel in order to maintain project schedules, even when a serial, or waterfall, workflow might be more appropriate.
 This can mean that work commences with incomplete information,
@@ -189,11 +190,47 @@ a significant cost penalty associated with increasing computational
 complexity when calculations are carried out by hand
 on account of the additional “manhours” required,
 particularly when re-work is required.</p>
+<p>The arrival of the personal computer on the engineer’s desk was considered
+at the time to be a great advancement in terms of productivity improvement,
+augmentation of computational capability, and general improvement in
+engineering quality.
+In reality however, the PC was not so much of a revolution
+in the engineering office, it was more of an evolution from paper to the
+desktop computer. Apart from the fact that the actual computational
+work was now being carried out by computer, the actual work practices
+and design processes remain much the same to this day. Granted that there
+has been a significant increase in use of advanced computational technologies,
+like the finite element method, at the same time a lot of engineering
+design work continues to be based on the same well-understood, simpler
+engineering theory, except that now the caculations are carried out
+on electronic spreadsheets and “worksheets” that greatly resemble their
+paper predecessors. A time-and-motion study carried out on a junior
+engineer in most engineering design offices today would reveal that most of
+their time is spent manually entering data into computer programs, and manually
+copying-and-pasting the calculated results into word processors, and after that
+a great deal of time is spend manaully preparing over-formatted
+“reports” that require
+constant adjustments to pass quality checks
+(that are also still carried out manually.)</p>
+<p>This at least has been the author’s experience in working
+as a subsea pipeline engineer for more than
+20 years in the oil &amp; gas industry.
+In recent years however, a great change has come to this industry.
+Since 2014 an unexpected and sustained reduction in the oil price has
+led to calls to reduce costs, but without compromising
+safety. It is recognized that oil &amp; gas has fallen behind other industries
+in terms of productivity and technology uptake, and that
+digitalization, adopting new technologies and changing the
+ways we work are widely regarded as means of achieving the goals
+of sustainably reducing costs without increasing risks.</p>
 
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
+<div id="ref-sacred">
+<p>Greff, Klaus, Aaron Klein, Martin Chovanec, Frank Hutter, and Jürgen Schmidhuber. 2017. “The Sacred Infrastructure for Computational Research.” In <em>Proceedings of the 16th Python in Science Conference</em>, edited by Katy Huff, David Lippa, Dillon Niederhut, and M Pacer, 49–56. Austin, TX.</p>
+</div>
 <div id="ref-vyas_ramasubramani-proc-scipy-2018">
 <p>Ramasubramani, Carl S. Adorf, Paul M. Dodd, Bradley D. Dice, and Sharon C. Glotzer. 2018. “Signac: A Python Framework for Data and Workflow Management.” In <em>Proceedings of the 17th Python in Science Conference</em>, edited by Fatih Akici, David Lippa, Dillon Niederhut, and M Pacer, 152–59. <a href="https://doi.org/ 10.25080/Majora-4af1f417-016 ">https://doi.org/ 10.25080/Majora-4af1f417-016</a>.</p>
 </div>
@@ -204,7 +241,7 @@ particularly when re-work is required.</p>
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="literature.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-to-pflacs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
