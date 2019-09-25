@@ -7,7 +7,8 @@ bookdown::gitbook:
       before: |
         <li><a href="./index.html">Introduction to <span style="font-variant:small-caps;">Pflacs</span></a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+        <li><a href="https://github.com/qwilka/pflacs"><span style="font-variant:small-caps;">Pflacs</span> on GitHub</a></li>
+        <li><a href="https://pypi.org/project/pflacs"><span style="font-variant:small-caps;">Pflacs</span> on PyPI</a></li>
     edit: null
     search: no
     download: ["pdf"]
