@@ -22,4 +22,4 @@ The engineering design process has a significant computational component involvi
 
 ## About the Author {-}
 
-Stephen McEntee is a subsea engineer..
+Stephen McEntee is a subsea engineer. This is a test of Rmarkdown/Bookown.

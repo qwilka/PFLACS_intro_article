@@ -16,7 +16,7 @@ bookdown::gitbook:
       twitter: yes
       linkedin: yes
       github: yes
-      facebook: no
+      facebook: yes
       all: no
 bookdown::pdf_book:
   includes:
